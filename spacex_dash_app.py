@@ -64,7 +64,8 @@ def get_pie_chart(site):
                 Input(component_id="payload-slider", component_property="value")])
 def get_scatter_plot(site,payload):
     if site=='ALL':
-        fig= px.scatter(spacex_df,x='Payload Mass (kg)',y='class',color='Booster Version',title='Correlation between Payload and Success for all Sites')
+        df= spacex_df[(spacex_df['Payload Mass (kg)']>=payload[0]) & (spacex_df['Payload Mass (kg)']<=payload[1])]
+        fig= px.scatter(df,x='Payload Mass (kg)',y='class',color='Booster Version',title='Correlation between Payload and Success for all Sites')
         return fig
     else:
         df= spacex_df[(spacex_df['Payload Mass (kg)']>=payload[0]) & (spacex_df['Payload Mass (kg)']<=payload[1])]
